@@ -6,6 +6,8 @@ public class Server
        public final static int PORT=7777; 
        public static void main(String args[])
        {
+          System.out.println("*************Stop and Wait************");
+
                String hostname="localhost";
                byte[] buf=new byte[60];
               try
@@ -17,14 +19,17 @@ public class Server
                        {
                            ds.receive(dp);
                            String s=new String(dp.getData(),0,dp.getLength());
-                           System.out.println("Cleint's Meassage  : "+s);
-                           System.out.println("Send a message to client : ");
-                           String sn=userIn.readLine();
-                           if(sn.equals("end")) break;
-                           byte[] data=sn.getBytes();
-                           DatagramPacket op;
-                           op=new DatagramPacket(data,data.length,dp.getAddress(),dp.getPort());            
-                           ds.send(op);    
+                           System.out.println("Client's Message  : "+s);
+                           if(s.length()>0){
+                
+                            String sn="Acknowledgement Responce ";
+                            if(sn.equals("end")) break;
+                            byte[] data=sn.getBytes();
+                            DatagramPacket op;
+                            op=new DatagramPacket(data,data.length,dp.getAddress(),dp.getPort());            
+                            ds.send(op);    
+                           }
+                        
              }
                  } 
                 catch(IOException e)

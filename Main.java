@@ -7,6 +7,7 @@ public class Main
     public static void main(String args[])
     {
           String hostname="localhost";
+          System.out.println("*************Stop and Wait************");
           try
           {
                 InetAddress in=InetAddress.getByName(hostname);
@@ -23,11 +24,11 @@ public class Main
                            byte [] data=s.getBytes();
                            DatagramPacket dp=new DatagramPacket(data,data.length,in,PORT);
                            ds.send(dp);
-                           byte []buf=new byte[20];
+                           byte []buf=new byte[100];
                            DatagramPacket dp2=new DatagramPacket(buf,buf.length);
                            ds.receive(dp2);
                            String ln=new String(dp2.getData(),0,dp2.getLength());
-                           System.out.println("Server:"+ln);
+                           System.out.println(ln);
                                        
 
 
